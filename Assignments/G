@@ -1,0 +1,34 @@
+---
+title: "power curve"
+author: "Jung Hwa Yeom"
+date: "2/11/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(pwr)
+library(ggplot2)
+library(plotly)
+```
+
+```{r}
+n <- 100
+m1 <- 69
+m2 <- 73
+p= seq(0.4, 1, 1/n)
+powercurve1 <- cumsum(dbinom(m1, n, p))
+powercurve2 <- cumsum(dbinom(m2, n, p))
+frame <- data.frame(p, powercurve1, powercurve2)
+plot <- ggplot(frame) + 
+  geom_rect(aes(xmin= 0.6, xmax= 0.8, ymin=0.05, ymax= 0.95), alpha = 0.5)+
+  geom_line(aes(p, powercurve1), color="red") +
+  geom_line(aes(p, powercurve2), color="blue") 
+plot + labs(x ="", y="") 
+                                                         
+                                                        
+```
+
+
+
+
